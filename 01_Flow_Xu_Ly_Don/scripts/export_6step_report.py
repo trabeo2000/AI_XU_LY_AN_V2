@@ -5,14 +5,7 @@ chuẩn thể thức hành chính & tư pháp TANDTC trong < 1 giây.
 
 Nhận đầu vào:
 - File Markdown (.md) chứa báo cáo 6 bước, HOẶC
-- File JSON (.json) chứa dữ liệu payload 6 bước.
-
-Đặc tính định dạng:
-- Lề trang chuẩn hành chính: Trái 3.0cm, Phải 2.0cm, Trên 2.0cm, Dưới 2.0cm (A4).
-- Font: Times New Roman 13-14pt, giãn dòng 1.2pt.
-- Header chuẩn: TÒA ÁN NHÂN DÂN TỐI CAO / VỤ GIÁM ĐỐC KIỂM TRA II & Quốc hiệu.
-- Bảng biểu ma trận: Header màu Deep Navy (#003366) chữ trắng, xen kẽ dòng zebra, viền xám nhạt.
-- Callout box [TRẠNG THÁI HỒ SƠ ĐÃ KHÓA]: Nền xám nhạt (#F4F6F9), viền trái xanh Navy đậm.
+- File JSON (.json) chứa dữ liệu payload (dùng chung payload_schema.payload_to_6step_markdown).
 """
 import argparse
 import json
@@ -23,54 +16,35 @@ import docx
 from docx.shared import Cm, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
-from docx.oxml import OxmlElement, parse_xml
-from docx.oxml.ns import qn, nsdecls
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
 
-if sys.stdout.encoding != "utf-8":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths_config as cfg  # noqa: F401
+import docx_utils as du
+import payload_schema as ps
 
+du.ensure_utf8_stdout()
 
-def check_file_lock(path):
-    """Kiểm tra file đích có đang bị mở/khóa không trước khi ghi đè."""
-    if not os.path.exists(path):
-        return True, None
-    try:
-        with open(path, "r+b"):
-            return True, None
-    except PermissionError as e:
-        return False, f"File đang bị mở hoặc khóa quyền ghi: {path} ({e})"
-    except OSError as e:
-        return False, f"Không thể truy cập file đích: {path} ({e})"
+check_file_lock = du.check_file_lock
 
-FONT_NAME = "Times New Roman"
+FONT_NAME = du.FONT_NAME
 COLOR_PRIMARY = RGBColor(0, 51, 102)     # Deep Navy (#003366)
 COLOR_SECONDARY = RGBColor(180, 0, 0)   # Dark Red / Highlight
 COLOR_TEXT = RGBColor(30, 30, 30)       # Charcoal Body Text
 COLOR_MUTED = RGBColor(90, 90, 90)      # Gray caption
 
+LIST_PREFIX_RE = re.compile(r"^(?:[-•*]|\d+[\.\)])\s")
+TABLE_SEP_RE = re.compile(r"^:?-{2,}:?$")
+
 
 def set_run_font(run, size_pt=13, bold=False, italic=False, color=COLOR_TEXT):
-    run.font.name = FONT_NAME
-    run.font.size = Pt(size_pt)
-    run.bold = bold
-    run.italic = italic
-    if color:
-        run.font.color.rgb = color
-    rPr = run._r.get_or_add_rPr()
-    rFonts = rPr.find(qn("w:rFonts"))
-    if rFonts is None:
-        rFonts = OxmlElement("w:rFonts")
-        rPr.insert(0, rFonts)
-    for attr in ("ascii", "hAnsi", "cs", "eastAsia"):
-        rFonts.set(qn(f"w:{attr}"), FONT_NAME)
+    du.set_run_font(run, size_pt=size_pt, bold=bold, italic=italic, color=color)
 
 
 def add_formatted_runs(p, text, default_size=13, default_color=COLOR_TEXT):
     """Phân giải chuỗi có **in đậm** và *in nghiêng* thành các run chuẩn."""
-    pattern = re.compile(r"(\*\*.*?\*\*|\*.*?\*)")
+    pattern = re.compile(r"(\*\*.*?\*\*|\*[^*]+\*)")
     parts = pattern.split(text)
     for part in parts:
         if not part:
@@ -91,27 +65,24 @@ def add_callout(doc, text, bold_title=""):
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
     table.autofit = False
     table.columns[0].width = Cm(16.0)
-    
+
     cell = table.cell(0, 0)
-    shading = parse_xml(r'<w:shd {} w:fill="F4F6F9"/>'.format(nsdecls("w")))
-    cell._tc.get_or_add_tcPr().append(shading)
-    
     tcPr = cell._tc.get_or_add_tcPr()
-    borders = parse_xml(
+    tcPr.append(parse_xml(r'<w:shd {} w:fill="F4F6F9"/>'.format(nsdecls("w"))))
+    tcPr.append(parse_xml(
         r'<w:tcBorders {}><w:top w:val="none"/><w:left w:val="single" w:sz="24" w:space="0" w:color="003366"/><w:bottom w:val="none"/><w:right w:val="none"/></w:tcBorders>'.format(nsdecls("w"))
-    )
-    tcPr.append(borders)
-    
+    ))
+
     p = cell.paragraphs[0]
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.space_before = Pt(4)
     p.paragraph_format.space_after = Pt(4)
     p.paragraph_format.line_spacing = 1.2
-    
+
     if bold_title:
-        r_title = p.add_run(bold_title + "\n")
+        r_title = p.add_run(bold_title)
         set_run_font(r_title, size_pt=12.5, bold=True, italic=False, color=COLOR_PRIMARY)
-        
+
     for line in text.strip().split("\n"):
         line = line.strip()
         if not line:
@@ -121,7 +92,7 @@ def add_callout(doc, text, bold_title=""):
         p_line.paragraph_format.space_after = Pt(2)
         p_line.paragraph_format.line_spacing = 1.15
         add_formatted_runs(p_line, line, default_size=12, default_color=COLOR_TEXT)
-        
+
     p_spacer = doc.add_paragraph()
     p_spacer.paragraph_format.space_after = Pt(4)
 
@@ -133,13 +104,11 @@ def add_styled_table(doc, headers, data, col_widths=None):
     table = doc.add_table(rows=len(data) + 1, cols=num_cols)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
     table.autofit = False
-    
-    # Tính chiều rộng cột tự động nếu không truyền
+
     if not col_widths or len(col_widths) != num_cols:
         col_w = 16.0 / num_cols
         col_widths = [col_w] * num_cols
 
-    # Header Row
     hdr_cells = table.rows[0].cells
     for i, h_text in enumerate(headers):
         hdr_cells[i].width = Cm(col_widths[i])
@@ -149,12 +118,9 @@ def add_styled_table(doc, headers, data, col_widths=None):
         p.paragraph_format.space_after = Pt(4)
         r = p.add_run(h_text.strip())
         set_run_font(r, size_pt=11.5, bold=True, italic=False, color=RGBColor(255, 255, 255))
-        
-        shading = parse_xml(r'<w:shd {} w:fill="003366"/>'.format(nsdecls("w")))
-        hdr_cells[i]._tc.get_or_add_tcPr().append(shading)
+        hdr_cells[i]._tc.get_or_add_tcPr().append(parse_xml(r'<w:shd {} w:fill="003366"/>'.format(nsdecls("w"))))
         hdr_cells[i].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
 
-    # Data Rows
     for r_idx, row_values in enumerate(data):
         row_cells = table.rows[r_idx + 1].cells
         bg_color = "F9FAFC" if r_idx % 2 == 1 else "FFFFFF"
@@ -168,29 +134,33 @@ def add_styled_table(doc, headers, data, col_widths=None):
             p.paragraph_format.space_after = Pt(3)
             p.paragraph_format.line_spacing = 1.15
             add_formatted_runs(p, val, default_size=11, default_color=COLOR_TEXT)
-            
-            shading = parse_xml(r'<w:shd {} w:fill="{}"/>'.format(nsdecls("w"), bg_color))
-            row_cells[c_idx]._tc.get_or_add_tcPr().append(shading)
+            row_cells[c_idx]._tc.get_or_add_tcPr().append(parse_xml(r'<w:shd {} w:fill="{}"/>'.format(nsdecls("w"), bg_color)))
             row_cells[c_idx].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
 
-    # Viền bảng xám nhẹ (#D0D5DD)
     for row in table.rows:
         for cell in row.cells:
             tcPr = cell._tc.get_or_add_tcPr()
-            borders = parse_xml(
+            tcPr.append(parse_xml(
                 r'<w:tcBorders {}><w:top w:val="single" w:sz="4" w:space="0" w:color="D0D5DD"/><w:left w:val="single" w:sz="4" w:space="0" w:color="D0D5DD"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="D0D5DD"/><w:right w:val="single" w:sz="4" w:space="0" w:color="D0D5DD"/></w:tcBorders>'.format(nsdecls("w"))
-            )
-            tcPr.append(borders)
-            
-    doc_p = table._tbl.getparent()
-    p_after = docx.text.paragraph.Paragraph(OxmlElement("w:p"), doc_p)
+            ))
+
+    # Thêm đoạn đệm thực sự vào body XML (sửa lỗi orphan OxmlElement)
+    p_after = doc.add_paragraph()
+    p_after.paragraph_format.space_before = Pt(0)
     p_after.paragraph_format.space_after = Pt(6)
 
 
-def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_run=False):
+def _split_md_row(stripped_line):
+    """Tách cột bảng Markdown an toàn (hỗ trợ escape pipe \\|)."""
+    inner = stripped_line[1:-1]
+    parts = re.split(r"(?<!\\)\|", inner)
+    return [p.replace("\\|", "|").strip() for p in parts]
+
+
+def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_run=False,
+                            don_vi_trinh=ps.DEFAULT_DON_VI, thu_tuc="GIÁM ĐỐC THẨM"):
     doc = docx.Document()
-    
-    # 1. Cấu hình lề trang A4 tiêu chuẩn (3 - 2 - 2 - 2 cm)
+
     for s in doc.sections:
         s.top_margin = Cm(2.0)
         s.bottom_margin = Cm(2.0)
@@ -198,32 +168,33 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
         s.right_margin = Cm(2.0)
         s.page_width = Cm(21.0)
         s.page_height = Cm(29.7)
-        
-    # 2. Header Quốc hiệu & Đơn vị (Chuẩn TANDTC)
+
+    don_vi_label = (don_vi_trinh or ps.DEFAULT_DON_VI).strip().upper()
+    thu_tuc_label = (thu_tuc or "GIÁM ĐỐC THẨM").strip().upper()
+
     t_header = doc.add_table(rows=1, cols=2)
     t_header.alignment = WD_TABLE_ALIGNMENT.CENTER
     t_header.autofit = False
     t_header.columns[0].width = Cm(7.5)
     t_header.columns[1].width = Cm(8.5)
-    
+
     p0 = t_header.cell(0, 0).paragraphs[0]
     p0.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r1 = p0.add_run("TÒA ÁN NHÂN DÂN TỐI CAO\nVỤ GIÁM ĐỐC KIỂM TRA II\n──────────────")
+    r1 = p0.add_run(f"TÒA ÁN NHÂN DÂN TỐI CAO\n{don_vi_label}\n──────────────")
     set_run_font(r1, size_pt=11, bold=True, color=COLOR_PRIMARY)
-    
+
     p1 = t_header.cell(0, 1).paragraphs[0]
     p1.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r2 = p1.add_run("CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM\nĐộc lập - Tự do - Hạnh phúc\n──────────────────────")
     set_run_font(r2, size_pt=11, bold=True, color=COLOR_PRIMARY)
-    
-    # 3. Tiêu đề Báo cáo
+
     p_t = doc.add_paragraph()
     p_t.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_t.paragraph_format.space_before = Pt(12)
     p_t.paragraph_format.space_after = Pt(4)
-    r_t = p_t.add_run("BÁO CÁO TOÀN DIỆN KẾT QUẢ NGHIÊN CỨU HỒ SƠ VỤ ÁN\nQUY TRÌNH 6 BƯỚC XỬ LÝ ĐƠN ĐỀ NGHỊ GIÁM ĐỐC THẨM")
+    r_t = p_t.add_run(f"BÁO CÁO TOÀN DIỆN KẾT QUẢ NGHIÊN CỨU HỒ SƠ VỤ ÁN\nQUY TRÌNH 6 BƯỚC XỬ LÝ ĐƠN ĐỀ NGHỊ {thu_tuc_label}")
     set_run_font(r_t, size_pt=14.5, bold=True, color=COLOR_SECONDARY)
-    
+
     if title_case or subtitle:
         p_sub = doc.add_paragraph()
         p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -231,7 +202,6 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
         r_sub = p_sub.add_run(f"{title_case}\n{subtitle}".strip())
         set_run_font(r_sub, size_pt=12, bold=True, italic=True, color=COLOR_PRIMARY)
 
-    # 4. Phân tích nội dung Markdown
     lines = md_text.splitlines()
     in_table = False
     table_headers = []
@@ -250,7 +220,7 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
 
     def flush_callout():
         nonlocal in_callout, callout_lines, callout_title
-        if in_callout and callout_lines:
+        if in_callout and (callout_lines or callout_title):
             add_callout(doc, "\n".join(callout_lines), bold_title=callout_title)
         in_callout = False
         callout_lines = []
@@ -258,13 +228,11 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
 
     for line in lines:
         stripped = line.strip()
-        
-        # Kiểm tra bảng markdown: | col1 | col2 |
-        if stripped.startswith("|") and stripped.endswith("|"):
+
+        if stripped.startswith("|") and stripped.endswith("|") and len(stripped) > 2:
             flush_callout()
-            cells = [c.strip() for c in stripped.split("|")[1:-1]]
-            if all(c.startswith("---") or c.startswith(":-") for c in cells if c):
-                # Dòng phân cách header
+            cells = _split_md_row(stripped)
+            if cells and all(TABLE_SEP_RE.match(c) for c in cells if c):
                 continue
             if not in_table:
                 in_table = True
@@ -276,7 +244,6 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
         else:
             flush_table()
 
-        # Kiểm tra Callout box: > ...
         if stripped.startswith(">"):
             content = stripped[1:].strip()
             if not in_callout:
@@ -294,7 +261,6 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
         else:
             flush_callout()
 
-        # Tiêu đề H1 (# ...)
         if stripped.startswith("# "):
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(14)
@@ -304,7 +270,6 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
             set_run_font(r, size_pt=14, bold=True, color=COLOR_PRIMARY)
             continue
 
-        # Tiêu đề H2 (## ...)
         if stripped.startswith("## "):
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(10)
@@ -314,7 +279,6 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
             set_run_font(r, size_pt=13, bold=True, color=COLOR_PRIMARY)
             continue
 
-        # Tiêu đề H3 (### ...)
         if stripped.startswith("### "):
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(8)
@@ -324,11 +288,13 @@ def build_doc_from_markdown(md_text, out_path, title_case="", subtitle="", dry_r
             set_run_font(r, size_pt=12.5, bold=True, color=COLOR_PRIMARY)
             continue
 
-        # Đoạn văn thông thường
+        if stripped in ("---", "***", "___"):
+            continue
+
         if stripped:
             p = doc.add_paragraph()
             p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-            p.paragraph_format.first_line_indent = Cm(1.0) if not stripped.startswith(("-", "•", "1.", "2.", "3.", "4.", "5.")) else Cm(0)
+            p.paragraph_format.first_line_indent = Cm(0) if LIST_PREFIX_RE.match(stripped) else Cm(1.0)
             p.paragraph_format.space_before = Pt(0)
             p.paragraph_format.space_after = Pt(4)
             p.paragraph_format.line_spacing = 1.2
@@ -372,63 +338,21 @@ def main():
     elif ext == ".json":
         with open(input_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-        meta = data.get("metadata", {})
-        md_parts = [
-            "# THÔNG TIN ĐƯƠNG SỰ & BẢN ÁN BỊ KHIẾU NẠI",
-            f"- **Vụ việc:** {meta.get('tieu_de_vu_an') or meta.get('quan_he_tranh_chap', '')}",
-            f"- **Bản án phúc thẩm:** {meta.get('so_ba_pt', '')} ngày {meta.get('ngay_ba_pt') or meta.get('ngay_tuyen_pt', '')} của {meta.get('toa_an_pt', '')}",
-            f"- **Bản án sơ thẩm:** {meta.get('so_ba_st', '')} ngày {meta.get('ngay_ba_st') or meta.get('ngay_tuyen_st', '')} của {meta.get('toa_an_st', '')}\n",
-            "# I. TÓM TẮT NỘI DUNG VỤ ÁN",
-        ]
-        for block in data.get("muc_1_tom_tat", []):
-            if isinstance(block, str):
-                md_parts.append(block)
-            elif isinstance(block, dict):
-                if block.get("tieu_de"):
-                    md_parts.append(f"## {block['tieu_de']}")
-                for p in block.get("doan_van", []):
-                    md_parts.append(str(p))
-
-        md_parts.append("\n# II. QUÁ TRÌNH GIẢI QUYẾT TẠI CÁC CẤP TÒA ÁN")
-        m2 = data.get("muc_2_qua_trinh") or data.get("muc_2_noi_dung_an") or {}
-        md_parts.append(f"## {m2.get('so_tham_tieu_de', 'Cấp sơ thẩm')}")
-        for p in (m2.get("so_tham_quyet_dinh") or m2.get("so_tham_noi_dung") or []):
-            md_parts.append(str(p))
-        md_parts.append(f"## {m2.get('phuc_tham_tieu_de', 'Cấp phúc thẩm')}")
-        for p in (m2.get("phuc_tham_quyet_dinh") or m2.get("phuc_tham_noi_dung") or []):
-            md_parts.append(str(p))
-
-        md_parts.append("\n# III. NỘI DUNG ĐƠN KHIẾU NẠI & YÊU CẦU")
-        m3 = data.get("muc_3_de_nghi", {})
-        if m3.get("mo_dau"):
-            md_parts.append(str(m3["mo_dau"]))
-        for yc in (m3.get("cac_ly_do") or m3.get("cac_noi_dung_khieu_nai") or m3.get("cac_noi_dung_khiếu_nai") or []):
-            md_parts.append(str(yc) if str(yc).startswith("-") else f"- {yc}")
-
-        md_parts.append("\n# IV. KẾT QUẢ ĐÁNH GIÁ CĂN CỨ & ĐỀ XUẤT XỬ LÝ")
-        m4 = data.get("muc_4_de_xuat", {})
-        if m4.get("nhan_dinh_chung"):
-            md_parts.append(str(m4["nhan_dinh_chung"]))
-        for item in m4.get("noi_dung_phan_tich", []):
-            md_parts.append(item.get("text", "") if isinstance(item, dict) else str(item))
-        for sub in m4.get("cac_muc_phan_tich", []):
-            md_parts.append(f"### {sub.get('tieu_de', '')}")
-            for p in sub.get("doan_van", []):
-                md_parts.append(str(p))
-        de_xuat = m4.get("de_xuat_chot") or m4.get("ket_luan_de_xuat") or ""
-        if de_xuat:
-            md_parts.append(f"## Quan điểm đề xuất: {de_xuat}")
-
-        full_md = "\n".join(md_parts)
+        norm = ps.normalize_payload(data)
+        meta = norm.get("metadata", {})
+        full_md = ps.payload_to_6step_markdown(norm)
         build_doc_from_markdown(
             full_md,
             args.output,
-            title_case=meta.get("tieu_de_vu_an") or meta.get("quan_he_tranh_chap", ""),
-            subtitle=f"Bản án phúc thẩm số: {meta.get('so_ba_pt', '')}",
+            title_case=args.title or meta.get("tieu_de_vu_an") or meta.get("quan_he_tranh_chap", ""),
+            subtitle=args.subtitle or f"Bản án phúc thẩm số: {meta.get('so_ba_pt', '')}",
             dry_run=args.dry_run,
+            don_vi_trinh=meta.get("don_vi_trinh", ps.DEFAULT_DON_VI),
+            thu_tuc=meta.get("thu_tuc", "GIÁM ĐỐC THẨM"),
         )
     else:
         print("[ERROR] Định dạng không hỗ trợ. Hãy dùng .md hoặc .json")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

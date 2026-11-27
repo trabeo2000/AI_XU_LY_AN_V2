@@ -4,46 +4,41 @@ Trích xuất phôi chuẩn base_to_trinh_tandtc.docx trực tiếp từ file g�
 nhằm bảo toàn 100% docDefaults, styles.xml, footer1.xml, lề trang A4 và
 2 đường kẻ ngang VML dưới Tên cơ quan & Tiêu ngữ.
 """
+import argparse
 import glob
 import os
 import shutil
 import sys
 from docx import Document
-from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paths_config as cfg
+import docx_utils as du
+
+du.ensure_utf8_stdout()
 
 _candidates = glob.glob(os.path.join(cfg.OUTPUT_ROOT_DIR, "*Vu_Nguyen_Ngoc_Hien_Nguyen_Kien_Thanh", "To_trinh_*.docx"))
-SRC_DOCX = _candidates[0] if _candidates else os.path.join(cfg.OUTPUT_ROOT_DIR, "07_Vu_Nguyen_Ngoc_Hien_Nguyen_Kien_Thanh", "To_trinh_Nguyễn_Ngọc_Hiền_Nguyễn_Kiến_Thành.docx")
+DEFAULT_SRC_DOCX = _candidates[0] if _candidates else ""
 DST_DIR = cfg.TEMPLATES_DIR
-DST_DOCX = os.path.join(DST_DIR, "base_to_trinh_tandtc.docx")
+DST_DOCX = cfg.BASE_TO_TRINH_TEMPLATE
 
 
-def build_base_template():
+def build_base_template(src_docx=None):
     os.makedirs(DST_DIR, exist_ok=True)
-    if not os.path.exists(SRC_DOCX):
+    source = src_docx or DEFAULT_SRC_DOCX
+    if not source or not os.path.exists(source):
         if os.path.exists(DST_DOCX):
             print(f"[OK] Phôi chuẩn đã tồn tại sẵn tại: {DST_DOCX}")
             return
-        raise FileNotFoundError(f"Không tìm thấy file nguồn gốc: {SRC_DOCX}")
-    shutil.copy2(SRC_DOCX, DST_DOCX)
+        raise FileNotFoundError(
+            "Không tìm thấy file nguồn gốc. Truyền đường dẫn qua `--source <file.docx>`."
+        )
+    shutil.copy2(source, DST_DOCX)
 
     doc = Document(DST_DOCX)
     body = doc.element.body
 
-    # Giữ lại chính xác 9 phần tử đầu:
-    # [0] Table 0 (Quốc hiệu, Tiêu ngữ, Tên cơ quan, Ngày tháng + 2 đường VML)
-    # [1] Dòng trống đệm
-    # [2] TỜ TRÌNH
-    # [3] CHÁNH ÁN TÒA ÁN NHÂN DÂN TỐI CAO
-    # [4] Về vụ án dân sự “...”
-    # [5] (Bản án dân sự phúc thẩm số ...
-    # [6] ngày ... của Tòa án nhân dân ...)
-    # [7] --------------------------------
-    # [8] Table 1 (Bảng chia đôi: Khung TKV bên trái | Đương sự bên phải)
-    # và phần tử cuối <w:sectPr>
     children = list(body)
     keep_count = 9
     for el in children[keep_count:]:
@@ -51,13 +46,11 @@ def build_base_template():
             continue
         body.remove(el)
 
-    # Chuẩn hóa nhẹ Table 1: chỉ giữ 1 hàng duy nhất (xóa hàng trống thứ 2 nếu có)
     tbl1 = doc.tables[1]._tbl
     trs = tbl1.findall(qn("w:tr"))
     for extra_tr in trs[1:]:
         tbl1.remove(extra_tr)
 
-    # Chuẩn hóa lề Footer = 0.50 cm (284 dxa) cho đẹp và đồng nhất
     sectPr = body.find(qn("w:sectPr"))
     if sectPr is not None:
         pgMar = sectPr.find(qn("w:pgMar"))
@@ -68,5 +61,12 @@ def build_base_template():
     print(f"[OK] Đã tạo phôi chuẩn XML gốc tại: {DST_DOCX}")
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Tái tạo phôi chuẩn base_to_trinh_tandtc.docx từ file Word mẫu gốc")
+    parser.add_argument("--source", "-s", help="Đường dẫn file Tờ trình Word gốc (tùy chọn)")
+    args = parser.parse_args()
+    build_base_template(src_docx=args.source)
+
+
 if __name__ == "__main__":
-    build_base_template()
+    main()

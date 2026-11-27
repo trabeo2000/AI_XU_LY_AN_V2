@@ -82,5 +82,5 @@ Tài liệu này là **Single Source of Truth duy nhất** tổng hợp toàn b�
       - `- Lưu: VP, Thẩm phán TANDTC {{TEN_THAM_PHAN}}, {{VU_GDKT}} (03 bản).`
   - **Cột 2 (Chữ ký Thẩm phán - Rộng `9.05 cm`, Căn giữa - Center):**
     - Dòng 1: **`TUQ. CHÁNH ÁN`** — **`13pt`, IN ĐẬM, IN HOA**, căn giữa.
-    - Dòng 2: **`THẨM PHÁN TÒA ÁN NHÂN DÂN TỐI CAO`** *(hoặc **`THẨM PHÁN TÒA ÁN NHÂN DÂN BẬC 3`** tùy chức danh Thẩm phán phụ trách theo TB 383/679)* — **`12pt`, IN ĐẬM, IN HOA**, căn giữa, **`Space After = 84pt`** (tạo khoảng trống ký tên 6-7 dòng).
+    - Dòng 2: **`THẨM PHÁN TÒA ÁN NHÂN DÂN TỐI CAO`** *(hoặc **`THẨM PHÁN TÒA ÁN NHÂN DÂN BẬC 3`** — `export_dossier.py` tự động chuyển đổi đồng bộ cả dòng chữ ký và dòng `Lưu: VP, ...` khi `metadata.chuc_danh_tham_phan` chứa `bậc 3`)*. — **`12pt`, IN ĐẬM, IN HOA**, căn giữa, **`Space After = 84pt`** (tạo khoảng trống ký tên 6-7 dòng).
     - Dòng 3: **`{{TEN_THAM_PHAN}}`** — **`14pt`, IN ĐẬM**, căn giữa.

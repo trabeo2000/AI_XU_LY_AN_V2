@@ -124,7 +124,7 @@ Tài liệu này là **Single Source of Truth duy nhất** tổng hợp toàn b�
 ### ✍️ Thành phần 7: Mục `IV. ĐỀ XUẤT GIẢI QUYẾT ĐƠN ĐỀ NGHỊ`, Bảng Chữ Ký & Các Cấp Phê Duyệt
 - **Tiêu đề mục:** **`IV. ĐỀ XUẤT GIẢI QUYẾT ĐƠN ĐỀ NGHỊ`** — **IN ĐẬM, IN HOA**, thụt `1.25 cm`, `Before = 6pt`, `After = 6pt`.
 - **`1. Ý kiến đề xuất của cán bộ nghiên cứu:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `After = 6pt`.
-  - Nội dung phân tích pháp lý: **`14pt`, đứng thường**, căn đều, thụt `1.25 cm`, `After = 6pt`, trích dẫn đầy đủ `(BL ...)` và điều luật đúng phiên bản đã khóa ở Bước 1.
+  - Nội dung phân tích pháp lý: **`14pt`, đứng thường**, căn đều, thụt `1.25 cm`, `After = 6pt`, trích dẫn đầy đủ `(BL ...)` (nếu đã rút hồ sơ) và điều luật đúng phiên bản đã khóa ở Bước 1. **Trình bày rõ 2 lớp nhận định:** *(a) Đánh giá toàn diện việc giải quyết vụ án của Tòa án hai cấp (Tố tụng – Chứng cứ – Nội dung – Số học/THA, không phụ thuộc lý do trong đơn)* và *(b) Đánh giá, đối chiếu cụ thể từng lý do đương sự nêu trong đơn*.
     - Nếu đánh số `1)`, `2)`, `3)`...: số **`1)` IN ĐẬM**, nội dung đứng thường.
     - Nếu tách tiểu ý `- Đối với ...:`: cụm dẫn *`Đối với ...`* **IN NGHIÊNG**, nội dung đứng thường.
   - Đoạn chốt đề xuất: **`Thư ký viên đề xuất`** (**`14pt`, IN ĐẬM**) + `: {{DE_XUAT_CHOT}}` (`14pt`, đứng thường), `After = 0pt`.
@@ -138,10 +138,12 @@ Tài liệu này là **Single Source of Truth duy nhất** tổng hợp toàn b�
       - Dòng 5: **`{{HO_TEN_TKV}}`**
 - **`2. Ý kiến của {{CHUC_DANH_THAM_PHAN}} {{HO_TEN_THAM_PHAN}} ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt`.
   - Nội dung: Điền sẵn **Dự thảo Đề xuất Ý kiến của Thẩm phán** (do AI soạn ở Bước 5 và User duyệt ở Bước 5.5 — `14pt`, đứng thường, căn đều, thụt `1.25 cm`) HOẶC để 3 dòng trống nếu User chọn để Thẩm phán tự ghi tay.
-- **Các mục Ý kiến Lãnh đạo cấp trên *(BẮT BUỘC có sẵn cuối Tờ trình)*:**
-  - **`3. Ý kiến của Lãnh đạo Vụ (Vụ trưởng / Phó Vụ trưởng) ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt` *(+ 3 dòng trống)*.
-  - **`4. Ý kiến của Phó Chánh án Tòa án nhân dân tối cao ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt` *(+ 3 dòng trống)*.
-  - **`5. Ý kiến của Chánh án Tòa án nhân dân tối cao ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt` *(+ 3 dòng trống)*.
+- **2 Chế độ phân cấp duyệt cuối Tờ trình (theo TB 383 & TB 679):**
+  - **Chế độ Rút gọn (`che_do_rut_gon: true` — Hướng Trả lời đơn):** Tự động **lược bỏ các mục 3, 4, 5**, dừng ngay tại Mục 2 để Thẩm phán duyệt ký trực tiếp Thông báo giải quyết đơn.
+  - **Chế độ Toàn diện (`che_do_rut_gon: false` — Mặc định cho Hướng Kháng nghị / Vụ phức tạp họp Tổ 05 Thẩm phán):** Tự động in đầy đủ các mục Ý kiến Lãnh đạo cấp trên:
+    - **`3. Ý kiến của Lãnh đạo Vụ (Vụ trưởng / Phó Vụ trưởng) ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt` *(+ 3 dòng trống)*.
+    - **`4. Ý kiến của Phó Chánh án Tòa án nhân dân tối cao ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt` *(+ 3 dòng trống)*.
+    - **`5. Ý kiến của Chánh án Tòa án nhân dân tối cao ngày      /     /{{NAM}}:`** — **`14pt`, IN ĐẬM**, thụt `1.25 cm`, `Before = 12pt`, `After = 6pt` *(+ 3 dòng trống)*.
 
 ---
 

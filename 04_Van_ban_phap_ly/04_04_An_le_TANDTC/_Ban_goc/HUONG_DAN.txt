@@ -1,0 +1,3 @@
+Thư mục lưu file gốc (.pdf / .docx) Tuyển tập Án lệ TANDTC.
+Sau khi chép file vào đây, chạy:
+  python 01_Flow_Xu_Ly_Don/scripts/sync_legal_knowledge.py --sync

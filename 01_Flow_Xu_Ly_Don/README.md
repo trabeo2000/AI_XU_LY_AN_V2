@@ -26,6 +26,7 @@ flowchart TD
         MD3["03_template_to_trinh.md"]
         MD4["04_template_khang_nghi.md"]
         MD5["05_template_thong_bao.md"]
+        MD6["06_template_van_ban_trung_gian.md"]
         TPL_TT["templates/base_to_trinh_tandtc.docx"]
         TPL_KN["templates/base_khang_nghi_tandtc.docx"]
         TPL_TB["templates/base_thong_bao_tld_tandtc.docx"]
@@ -85,9 +86,9 @@ flowchart TD
 
 2. **Phân vùng 2 - Động cơ xử lý (`scripts/fast_reader.py` & `.agents/AGENTS.md`):**
    - `fast_reader.py` đọc sạch nội dung văn bản text hoặc ghép đôi trang scan (`--stitch 2`) để đọc song song trong 1 turn.
-   - `AGENTS.md` duy trì trạng thái cố định qua 6 bước và 7 điểm dừng (Human Checkpoints).
+   - `AGENTS.md` duy trì trạng thái cố định qua 6 bước (+ Cổng khóa 5.5) và 8 điểm dừng (Human Checkpoints).
 
-3. **Phân vùng 3 - Khuôn mẫu chuẩn (`templates/`, `03/04/05_template_*.md`, `demo_*.json`, `case_registry.json`):**
+3. **Phân vùng 3 - Khuôn mẫu chuẩn (`templates/`, `03/04/05/06_template_*.md`, `demo_*.json`, `case_registry.json`):**
    - **Cơ chế Phôi Mẫu Word Trực Quan (Visual Template):** Cho phép Thẩm tra viên mở trực tiếp các file Word mẫu bằng Microsoft Word để sửa phông chữ, kẻ lại bảng, đổi màu hoặc thêm bớt các mục bằng chuột 100%:
      + [demo_phoi_to_trinh_truc_quan.docx](templates/demo_phoi_to_trinh_truc_quan.docx) (Mẫu Tờ trình trực quan)
      + [demo_phoi_khang_nghi_truc_quan.docx](templates/demo_phoi_khang_nghi_truc_quan.docx) (Mẫu Kháng nghị trực quan)
