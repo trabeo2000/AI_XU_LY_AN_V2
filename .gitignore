@@ -1,0 +1,23 @@
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Temporary payloads & PDF rendered image cache
+01_Flow_Xu_Ly_Don/scripts/.temp/
+.rendered_*/
+**/.rendered_*/
+
+# Microsoft Office temporary lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
+
+# OS & misc junk
+node_modules/
+.DS_Store
+Thumbs.db
+*.bak

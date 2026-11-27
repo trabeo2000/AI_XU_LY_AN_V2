@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Sơ Đồ Kiến Trúc Luồng Xử Lý File TANDTC (Ultra Crisp Vector)</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #0b0f17;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #4da3ff;
+    }
+    .header p {
+      margin: 8px 0 0;
+      color: #7e9bbd;
+      font-size: 14px;
+    }
+    .container {
+      width: 98%;
+      max-width: 1920px;
+      background: #0f141c;
+      border: 1px solid #2d3b4e;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      overflow: hidden;
+      padding: 10px;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .tip {
+      margin-top: 15px;
+      color: #00d26a;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🏛️ SƠ ĐỒ KIẾN TRÚC LUỒNG XỬ LÝ FILE HỒ SƠ ÁN TANDTC</h1>
+    <p>Bản vẽ Vector SVG sắc nét 100% - Đã cập nhật Động cơ Phôi Mẫu Trực Quan</p>
+  </div>
+  <div class="container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1180" width="1920" height="1180">
+  <defs>
+    <style>
+      .bg { fill: #0f141c; }
+      .box-bg { fill: #18202c; stroke: #2d3b4e; stroke-width: 2; rx: 12; }
+      .stage-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 19px; font-weight: 700; fill: #4da3ff; letter-spacing: 0.5px; }
+      .card-bg { fill: #202b3b; stroke: #3a4b63; stroke-width: 1.5; rx: 8; }
+      .card-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; font-weight: 700; fill: #ffffff; }
+      .card-desc { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12.5px; font-weight: 400; fill: #9bb0c9; }
+      .tag { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; fill: #00d26a; }
+      .arrow { stroke: #5b799e; stroke-width: 2.2; fill: none; }
+      .arrow-highlight { stroke: #ffaa00; stroke-width: 2.5; fill: none; }
+      .arrow-green { stroke: #00d26a; stroke-width: 2.5; fill: none; }
+      .label-bg { fill: #131a24; stroke: #3a4b63; stroke-width: 1; rx: 4; }
+      .label-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: 600; fill: #d1e2f7; text-anchor: middle; }
+    </style>
+    
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#5b799e" />
+    </marker>
+    <marker id="arrowhead-highlight" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ffaa00" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#00d26a" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- NỀN CHÍNH -->
+  <rect width="1920" height="1180" class="bg"/>
+
+  <!-- TIÊU ĐỀ TOÀN HỆ THỐNG -->
+  <text x="960" y="45" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="800" fill="#ffffff" letter-spacing="1px">
+    KIẾN TRÚC LUỒNG DỮ LIỆU &amp; QUY TRÌNH XỬ LÝ HỒ SƠ ÁN TANDTC (FILE FLOW ARCHITECTURE)
+  </text>
+  <text x="960" y="72" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="500" fill="#7e9bbd">
+    Hệ thống phân tách Module độc lập 100% Offline &amp; Portable trên cả 3 máy tính (Ở nhà, Cơ quan, Laptop)
+  </text>
+
+  <!-- ========================================== -->
+  <!-- PHÂN VÙNG 1: NGUỒN DỮ LIỆU ĐẦU VÀO -->
+  <!-- ========================================== -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="100" width="870" height="230" class="box-bg"/>
+    <text x="75" y="132" class="stage-title">🏛️ 1. NGUỒN DỮ LIỆU ĐẦU VÀO (INPUT)</text>
+
+    <!-- Card 1.1 -->
+    <rect x="70" y="150" width="255" height="155" class="card-bg"/>
+    <rect x="85" y="165" width="60" height="22" rx="4" fill="#003366"/>
+    <text x="115" y="180" class="tag" fill="#4da3ff" text-anchor="middle">HỒ SƠ GỐC</text>
+    <text x="85" y="210" class="card-title">📁 02_Ho_so/</text>
+    <text x="85" y="235" class="card-desc">• PDF Scan nhiều trang (100-200 tr)</text>
+    <text x="85" y="255" class="card-desc">• File Word (.docx), Excel (.xlsx)</text>
+    <text x="85" y="275" class="card-desc">• Giữ cố định, chỉ đọc không sửa</text>
+
+    <!-- Card 1.2 -->
+    <rect x="345" y="150" width="270" height="155" class="card-bg"/>
+    <rect x="360" y="165" width="85" height="22" rx="4" fill="#3d2b00"/>
+    <text x="402" y="180" class="tag" fill="#ffaa00" text-anchor="middle">LUẬT NỘI DUNG</text>
+    <text x="360" y="210" class="card-title">📚 04_Van_ban_phap_ly/</text>
+    <text x="360" y="235" class="card-desc">• BLDS 1995 / 2005 / 2015, Luật Đất đai</text>
+    <text x="360" y="255" class="card-desc">• Nghị quyết 01/2025/NQ-HĐTP</text>
+    <text x="360" y="275" class="card-desc">• Nghị quyết 02/2004/NQ-HĐTP, Án lệ</text>
+
+    <!-- Card 1.3 -->
+    <rect x="635" y="150" width="265" height="155" class="card-bg"/>
+    <rect x="650" y="165" width="95" height="22" rx="4" fill="#004d26"/>
+    <text x="697" y="180" class="tag" fill="#00d26a" text-anchor="middle">NGHIỆP VỤ TANDTC</text>
+    <text x="650" y="210" class="card-title">⚖️ 05_Quy_trinh_Chuc_danh/</text>
+    <text x="650" y="235" class="card-desc">• Cẩm nang nghiệp vụ GĐKT 01/2025</text>
+    <text x="650" y="255" class="card-desc">• Quy chế 75, TB 383, TB 679 TANDTC</text>
+    <text x="650" y="275" class="card-desc">• Phân cấp thẩm quyền TANDTC / Tỉnh</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- PHÂN VÙNG 3: SINGLE SOURCE OF TRUTH (TEMPLATES & SCHEMAS) -->
+  <!-- ========================================== -->
+  <g filter="url(#shadow)">
+    <rect x="960" y="100" width="910" height="230" class="box-bg"/>
+    <text x="985" y="132" class="stage-title">📐 3. SINGLE SOURCE OF TRUTH (TEMPLATES &amp; SCHEMAS)</text>
+
+    <!-- Card 3.1 -->
+    <rect x="980" y="150" width="280" height="155" class="card-bg" stroke="#00d26a" stroke-width="1.8"/>
+    <rect x="995" y="165" width="115" height="22" rx="4" fill="#004d26"/>
+    <text x="1052" y="180" class="tag" fill="#00d26a" text-anchor="middle">PHÔI TRỰC QUAN</text>
+    <text x="995" y="210" class="card-title">📄 templates/demo_phoi_*.docx</text>
+    <text x="995" y="235" class="card-desc">• demo_phoi_to_trinh_truc_quan.docx</text>
+    <text x="995" y="255" class="card-desc">• demo_phoi_khang_nghi_truc_quan.docx</text>
+    <text x="995" y="275" class="card-desc" fill="#00d26a" font-weight="700">★ Sửa trực tiếp bằng Word cực dễ!</text>
+
+    <!-- Card 3.2 -->
+    <rect x="1280" y="150" width="275" height="155" class="card-bg"/>
+    <rect x="1295" y="165" width="80" height="22" rx="4" fill="#1f3d3d"/>
+    <text x="1335" y="180" class="tag" fill="#33cccc" text-anchor="middle">QUY CHUẨN THỂ THỨC</text>
+    <text x="1295" y="210" class="card-title">📑 03 &amp; 04_template_*.md</text>
+    <text x="1295" y="235" class="card-desc">• 03_template_to_trinh.md</text>
+    <text x="1295" y="255" class="card-desc">• 04_template_khang_nghi.md</text>
+    <text x="1295" y="275" class="card-desc">• Thông số chi tiết cm, dxa, font chữ</text>
+
+    <!-- Card 3.3 -->
+    <rect x="1575" y="150" width="275" height="155" class="card-bg"/>
+    <rect x="1590" y="165" width="90" height="22" rx="4" fill="#4d1f24"/>
+    <text x="1635" y="180" class="tag" fill="#ff6666" text-anchor="middle">KHUÔN SCHEMA</text>
+    <text x="1590" y="210" class="card-title">🧩 demo_*_payload.json</text>
+    <text x="1590" y="235" class="card-desc">• demo_payload.json (Tờ trình)</text>
+    <text x="1590" y="255" class="card-desc">• demo_khang_nghi_payload.json</text>
+    <text x="1590" y="275" class="card-desc">• Khuôn mẫu chuẩn trường, chống lỗi</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- PHÂN VÙNG 2: ĐỘNG CƠ XỬ LÝ (SCRIPTS & AGENTS) -->
+  <!-- ========================================== -->
+  <g filter="url(#shadow)">
+    <rect x="250" y="380" width="1420" height="260" class="box-bg" stroke="#3b5373" stroke-width="2.5"/>
+    <text x="280" y="415" class="stage-title">⚙️ 2. ĐỘNG CƠ ĐIỀU PHỐI &amp; XỬ LÝ DỮ LIỆU (CORE ENGINE)</text>
+
+    <!-- Card 2.1 -->
+    <rect x="280" y="440" width="370" height="175" class="card-bg"/>
+    <rect x="300" y="455" width="100" height="22" rx="4" fill="#003366"/>
+    <text x="350" y="470" class="tag" fill="#4da3ff" text-anchor="middle">ĐỌC TÀI LIỆU</text>
+    <text x="300" y="500" class="card-title">⚡ scripts/fast_reader.py</text>
+    <text x="300" y="525" class="card-desc">• Trích xuất sạch Word, Excel, PDF số trong 0.2s</text>
+    <text x="300" y="545" class="card-desc">• PDF Scan: Định vị Bìa/Mục lục + Ghép 2 trang (--stitch 2)</text>
+    <text x="300" y="565" class="card-desc">• Đọc cụm ảnh song song trong 1 turn (Batch Read)</text>
+    <text x="300" y="585" class="card-desc">• Cache ảnh tạm: scripts/.temp/rendered_cache/</text>
+
+    <!-- Card 2.2 -->
+    <rect x="680" y="440" width="560" height="175" class="card-bg" stroke="#4da3ff" stroke-width="2"/>
+    <rect x="700" y="455" width="140" height="22" rx="4" fill="#004d26"/>
+    <text x="770" y="470" class="tag" fill="#00d26a" text-anchor="middle">KHUNG ĐIỀU HÀNH TỐI CAO</text>
+    <text x="700" y="500" class="card-title">🧠 .agents/AGENTS.md (Quy trình 6 Bước + 7 Checkpoints)</text>
+    <text x="700" y="525" class="card-desc">• Bước 1: Khởi tạo, xác nhận văn bản pháp lý &amp; Khóa hiệu lực luật</text>
+    <text x="700" y="545" class="card-desc">• Bước 2: Kiểm tra tiền sử đơn, điều kiện thụ lý &amp; Q&amp;A Thẩm tra viên</text>
+    <text x="700" y="565" class="card-desc">• Bước 3: Dòng thời gian (Timeline) &amp; Phân rã 100% yêu cầu khiếu nại</text>
+    <text x="700" y="585" class="card-desc">• Bước 4: Ma trận đối chiếu Chứng cứ - Điều luật &amp; Soi lỗi ngoài đơn</text>
+    <text x="700" y="605" class="card-desc">• Bước 5: Đề xuất 2 phương án | Bước 5.5: Menu 6 Option bắt buộc</text>
+
+    <!-- Card 2.3 -->
+    <rect x="1270" y="440" width="370" height="175" class="card-bg" stroke="#ffaa00" stroke-width="1.8"/>
+    <rect x="1290" y="455" width="130" height="22" rx="4" fill="#4d3300"/>
+    <text x="1355" y="470" class="tag" fill="#ffcc00" text-anchor="middle">CHỐT CHẶN BƯỚC 5.5</text>
+    <text x="1290" y="500" class="card-title">🔒 scripts/.temp/ (Auto Cleanup)</text>
+    <text x="1290" y="525" class="card-desc">• Bắt buộc hiển thị Menu 6 Option lựa chọn</text>
+    <text x="1290" y="545" class="card-desc">• DỪNG LẠI chờ Thẩm tra viên chọn số Option</text>
+    <text x="1290" y="565" class="card-desc">• Khóa chống tự ý sinh file nếu chưa chọn Option</text>
+    <text x="1290" y="585" class="card-desc">• Sinh payload JSON tạm &amp; Tự động xóa sạch sau xuất</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- PHÂN VÙNG 4: BỘ EXPORTER PYTHON UTF-8 -->
+  <!-- ========================================== -->
+  <g filter="url(#shadow)">
+    <rect x="180" y="690" width="1560" height="210" class="box-bg"/>
+    <text x="210" y="725" class="stage-title">🐍 4. BỘ CÔNG CỤ XUẤT VĂN BẢN WORD PYTHON UTF-8 (BƯỚC 6)</text>
+
+    <!-- Card 4.1 -->
+    <rect x="210" y="745" width="480" height="135" class="card-bg" stroke="#00d26a" stroke-width="1.8"/>
+    <rect x="230" y="760" width="125" height="20" rx="4" fill="#004d26"/>
+    <text x="292" y="774" class="tag" fill="#00d26a" text-anchor="middle">ĐỘNG CƠ TRỰC QUAN</text>
+    <text x="230" y="805" class="card-title">🚀 universal_visual_filler.py</text>
+    <text x="230" y="828" class="card-desc">• Rót dữ liệu vào Phôi Trực Quan trong &lt; 0.1 giây</text>
+    <text x="230" y="848" class="card-desc">• Hỗ trợ cả Tờ trình và Quyết định Kháng nghị</text>
+    <text x="230" y="868" class="card-desc" fill="#00d26a" font-weight="700">★ Thẩm tra viên tự sửa mẫu trên Word không cần code!</text>
+
+    <!-- Card 4.2 -->
+    <rect x="720" y="745" width="480" height="135" class="card-bg"/>
+    <rect x="740" y="760" width="90" height="20" rx="4" fill="#003366"/>
+    <text x="785" y="774" class="tag" fill="#4da3ff" text-anchor="middle">SCRIPT GỐC</text>
+    <text x="740" y="805" class="card-title">📝 export_to_trinh.py &amp; export_khang_nghi.py</text>
+    <text x="740" y="828" class="card-desc">• Xuất tự động nạp từ base XML gốc TANDTC</text>
+    <text x="740" y="848" class="card-desc">• Dry-run mode, File-lock check, Placeholder scan</text>
+    <text x="740" y="868" class="card-desc">• Tốc độ xuất &lt; 0.5 giây</text>
+
+    <!-- Card 4.3 -->
+    <rect x="1230" y="745" width="480" height="135" class="card-bg"/>
+    <rect x="1250" y="760" width="80" height="20" rx="4" fill="#004d26"/>
+    <text x="1290" y="774" class="tag" fill="#00d26a" text-anchor="middle">OPTION 5</text>
+    <text x="1250" y="805" class="card-title">📑 export_6step_report.py</text>
+    <text x="1250" y="828" class="card-desc">• Xuất Báo cáo Toàn diện Nghiên cứu Hồ sơ 6 Bước (.docx)</text>
+    <text x="1250" y="848" class="card-desc">• Bảng ma trận Navy, zebra row, callout box trạng thái khóa</text>
+    <text x="1250" y="868" class="card-desc">• Xuất ngay trong 1s, chấm dứt việc tự sinh code mất 5 phút</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- PHÂN VÙNG 5: SẢN PHẨM HOÀN CHỈNH ĐẦU RA -->
+  <!-- ========================================== -->
+  <g filter="url(#shadow)">
+    <rect x="180" y="940" width="1560" height="190" class="box-bg" stroke="#00d26a" stroke-width="2"/>
+    <text x="210" y="975" class="stage-title">🎯 5. SẢN PHẨM HOÀN CHỈNH BÀN GIAO THẨM TRA VIÊN (OUTPUT)</text>
+
+    <!-- Card 5.1 -->
+    <rect x="210" y="995" width="480" height="115" class="card-bg"/>
+    <text x="230" y="1025" class="card-title" fill="#4da3ff">📁 03_Ket_qua_Xu_ly/01_Vu_&lt;ten_vu&gt;/To_trinh_...</text>
+    <text x="230" y="1050" class="card-desc">• Tờ trình Chánh án TANDTC (gom theo hồ sơ, 01_ = mới nhất)</text>
+    <text x="230" y="1070" class="card-desc">• Đầy đủ bảng tiến độ trình, danh sách đương sự, ý kiến Thẩm phán</text>
+    <text x="230" y="1090" class="card-desc">• Dung lượng tối ưu: ~30 KB (giữ 100% XML &amp; VML gốc)</text>
+
+    <!-- Card 5.2 -->
+    <rect x="720" y="995" width="480" height="115" class="card-bg"/>
+    <text x="740" y="1025" class="card-title" fill="#cc66ff">📁 03_Ket_qua_Xu_ly/01_Vu_&lt;ten_vu&gt;/QD_Khang_nghi</text>
+    <text x="740" y="1050" class="card-desc">• Dự thảo Quyết định Kháng nghị Giám đốc thẩm / Tái thẩm</text>
+    <text x="740" y="1070" class="card-desc">• Chuẩn bản phát hành gốc (~30 KB), kiểm soát placeholder</text>
+    <text x="740" y="1090" class="card-desc">• Kèm Thông báo giải quyết đơn (TLĐ) chuẩn TB 383/679</text>
+
+    <!-- Card 5.3 -->
+    <rect x="1230" y="995" width="480" height="115" class="card-bg"/>
+    <text x="1250" y="1025" class="card-title" fill="#00d26a">📁 03_Ket_qua_Xu_ly/01_Vu_&lt;ten_vu&gt;/Bao_cao_6_buoc</text>
+    <text x="1250" y="1050" class="card-desc">• Báo cáo nghiên cứu toàn diện từ Bước 1 đến Bước 6</text>
+    <text x="1250" y="1070" class="card-desc">• Phục vụ báo cáo Lãnh đạo Vụ, họp Tổ 5 Thẩm phán, lưu trữ án</text>
+    <text x="1250" y="1090" class="card-desc">• Dung lượng chuẩn: ~40 KB (gom chung 1 thư mục vụ án)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- ĐƯỜNG KẾT NỐI (ARROWS & LABELS) -->
+  <!-- ========================================== -->
+  
+  <!-- 02_Ho_so -> fast_reader -->
+  <path d="M 197 305 L 197 525 L 280 525" class="arrow" marker-end="url(#arrowhead)"/>
+  <rect x="145" y="380" width="105" height="24" class="label-bg"/>
+  <text x="197" y="396" class="label-text">Đọc hồ sơ</text>
+
+  <!-- 04_Van_ban & 05_Quy_trinh -> AGENTS.md -->
+  <path d="M 480 305 L 480 350 L 800 350 L 800 440" class="arrow" marker-end="url(#arrowhead)"/>
+  <path d="M 767 305 L 767 350 L 800 350" class="arrow"/>
+  <rect x="730" y="338" width="140" height="24" class="label-bg"/>
+  <text x="800" y="354" class="label-text">Khóa bộ lọc luật</text>
+
+  <!-- fast_reader -> AGENTS.md -->
+  <path d="M 650 525 L 680 525" class="arrow-green" marker-end="url(#arrowhead-green)"/>
+
+  <!-- AGENTS.md -> .temp/ (Bước 5.5) -->
+  <path d="M 1240 525 L 1270 525" class="arrow-highlight" marker-end="url(#arrowhead-highlight)"/>
+  <rect x="1225" y="495" width="85" height="22" class="label-bg"/>
+  <text x="1267" y="510" class="label-text" fill="#ffaa00">Bước 5.5</text>
+
+  <!-- templates & schemas -> .temp / Exporters -->
+  <path d="M 1712 305 L 1712 390 L 1455 390 L 1455 440" class="arrow" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+  <rect x="1560" y="378" width="130" height="24" class="label-bg"/>
+  <text x="1625" y="394" class="label-text">Khuôn mẫu JSON</text>
+
+  <!-- .temp/ -> 3 Exporters -->
+  <path d="M 1455 615 L 1455 660 L 450 660 L 450 745" class="arrow-highlight" marker-end="url(#arrowhead-highlight)"/>
+  <path d="M 1455 660 L 960 660 L 960 745" class="arrow-highlight" marker-end="url(#arrowhead-highlight)"/>
+  <path d="M 1455 660 L 1470 660 L 1470 745" class="arrow-highlight" marker-end="url(#arrowhead-highlight)"/>
+  <rect x="900" y="648" width="120" height="24" class="label-bg"/>
+  <text x="960" y="664" class="label-text" fill="#ffaa00">Payload JSON</text>
+
+  <!-- Exporters -> Output -->
+  <path d="M 450 880 L 450 995" class="arrow-green" marker-end="url(#arrowhead-green)"/>
+  <path d="M 960 880 L 960 995" class="arrow-green" marker-end="url(#arrowhead-green)"/>
+  <path d="M 1470 880 L 1470 995" class="arrow-green" marker-end="url(#arrowhead-green)"/>
+
+</svg>
+  </div>
+  <p class="tip">💡 Mẹo: Dùng chuột kéo thả hoặc Zoom trình duyệt (Ctrl + cuộn chuột) để xem chi tiết từng phân vùng.</p>
+</body>
+</html>

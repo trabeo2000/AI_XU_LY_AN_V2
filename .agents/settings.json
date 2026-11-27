@@ -1,0 +1,16 @@
+{
+  "agentMode": "auto",
+  "toolPermission": "always-proceed",
+  "toolExecutionPolicy": "always-proceed",
+  "autoExecutionPolicy": "always-proceed",
+  "enableTerminalSandbox": false,
+  "allowNonWorkspaceAccess": true,
+  "permissions": {
+    "allow": [
+      "PowerShell(*)",
+      "Bash(*)",
+      "*"
+    ],
+    "deny": []
+  }
+}

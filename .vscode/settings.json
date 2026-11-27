@@ -1,0 +1,9 @@
+{
+  "antigravity.agentMode": "auto",
+  "antigravity.toolPermission": "always-proceed",
+  "antigravity.toolExecutionPolicy": "always-proceed",
+  "antigravity.autoExecutionPolicy": "always-proceed",
+  "antigravity.permissions.allow": [
+    "*"
+  ]
+}
