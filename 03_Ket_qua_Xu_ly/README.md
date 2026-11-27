@@ -13,7 +13,7 @@ Thư mục tổng hợp toàn bộ sản phẩm văn bản đầu ra của hệ 
 | :---: | :---: | :--- | :---: |
 | 01 | 27/11/2026 | [`01_Vu_Le_Thi_Hoan_Thai_Quyen_Anh/`](01_Vu_Le_Thi_Hoan_Thai_Quyen_Anh/) | 3 |
 | 02 | 27/11/2026 | [`02_Vu_Ho_Van_Phon_Pham_Thi_Vong/`](02_Vu_Ho_Van_Phon_Pham_Thi_Vong/) | 1 |
-| 03 | 26/11/2026 | [`03_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/`](03_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/) | 2 |
+| 03 | 26/11/2026 | [`03_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/`](03_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/) | 6 |
 | 04 | 26/11/2026 | [`04_Vu_Vo_Van_Ut_Vo_Thi_Ut/`](04_Vu_Vo_Van_Ut_Vo_Thi_Ut/) | 5 |
 | 05 | 26/11/2026 | [`05_Vu_Bui_Van_Cuoc_Pham_Thi_Qui/`](05_Vu_Bui_Van_Cuoc_Pham_Thi_Qui/) | 2 |
 | 06 | 26/11/2026 | [`06_Vu_Le_Thi_Tuyet_Mai_Au_Thi_Kieu_Trang/`](06_Vu_Le_Thi_Tuyet_Mai_Au_Thi_Kieu_Trang/) | 5 |
