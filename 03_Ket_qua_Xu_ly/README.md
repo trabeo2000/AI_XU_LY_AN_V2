@@ -11,13 +11,17 @@ Thư mục tổng hợp toàn bộ sản phẩm văn bản đầu ra của hệ 
 
 | STT | Ngày tạo | Thư mục hồ sơ | Số văn bản |
 | :---: | :---: | :--- | :---: |
-| 01 | 27/11/2026 | [`01_Vu_Le_Thi_Hoan_Thai_Quyen_Anh/`](01_Vu_Le_Thi_Hoan_Thai_Quyen_Anh/) | 3 |
-| 02 | 27/11/2026 | [`02_Vu_Ho_Van_Phon_Pham_Thi_Vong/`](02_Vu_Ho_Van_Phon_Pham_Thi_Vong/) | 1 |
-| 03 | 26/11/2026 | [`03_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/`](03_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/) | 6 |
-| 04 | 26/11/2026 | [`04_Vu_Vo_Van_Ut_Vo_Thi_Ut/`](04_Vu_Vo_Van_Ut_Vo_Thi_Ut/) | 5 |
-| 05 | 26/11/2026 | [`05_Vu_Bui_Van_Cuoc_Pham_Thi_Qui/`](05_Vu_Bui_Van_Cuoc_Pham_Thi_Qui/) | 2 |
-| 06 | 26/11/2026 | [`06_Vu_Le_Thi_Tuyet_Mai_Au_Thi_Kieu_Trang/`](06_Vu_Le_Thi_Tuyet_Mai_Au_Thi_Kieu_Trang/) | 5 |
-| 07 | 25/11/2026 | [`07_Vu_Phan_Van_Bay_Tran_Van_Mung/`](07_Vu_Phan_Van_Bay_Tran_Van_Mung/) | 1 |
-| 08 | 05/11/2026 | [`08_Vu_Nguyen_Ngoc_Hien_Nguyen_Kien_Thanh/`](08_Vu_Nguyen_Ngoc_Hien_Nguyen_Kien_Thanh/) | 4 |
-| 09 | 07/04/2026 | [`09_Vu_Lam_Thi_Deo_Vu_Thanh_Do/`](09_Vu_Lam_Thi_Deo_Vu_Thanh_Do/) | 1 |
+| 01 | 27/11/2026 | [`01_Vu_Duong_Thi_Ty_La_Thi_Loan_Khong_KN/`](01_Vu_Duong_Thi_Ty_La_Thi_Loan_Khong_KN/) | 2 |
+| 02 | 27/11/2026 | [`02_Vu_Nguyen_Thai_Y_Nguyen_Thi_Nguyet/`](02_Vu_Nguyen_Thai_Y_Nguyen_Thi_Nguyet/) | 4 |
+| 03 | 27/11/2026 | [`03_Vu_Le_Thi_Tim_Nguyen_Thi_Tuyet/`](03_Vu_Le_Thi_Tim_Nguyen_Thi_Tuyet/) | 4 |
+| 04 | 27/11/2026 | [`04_Vu_Duong_Thi_Ty_La_Thi_Loan/`](04_Vu_Duong_Thi_Ty_La_Thi_Loan/) | 4 |
+| 05 | 27/11/2026 | [`05_Vu_Le_Thi_Hoan_Thai_Quyen_Anh/`](05_Vu_Le_Thi_Hoan_Thai_Quyen_Anh/) | 3 |
+| 06 | 27/11/2026 | [`06_Vu_Ho_Van_Phon_Pham_Thi_Vong/`](06_Vu_Ho_Van_Phon_Pham_Thi_Vong/) | 1 |
+| 07 | 26/11/2026 | [`07_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/`](07_Vu_Tran_Thi_Lien_Nguyen_Thi_Huong/) | 7 |
+| 08 | 26/11/2026 | [`08_Vu_Vo_Van_Ut_Vo_Thi_Ut/`](08_Vu_Vo_Van_Ut_Vo_Thi_Ut/) | 5 |
+| 09 | 26/11/2026 | [`09_Vu_Bui_Van_Cuoc_Pham_Thi_Qui/`](09_Vu_Bui_Van_Cuoc_Pham_Thi_Qui/) | 2 |
+| 10 | 26/11/2026 | [`10_Vu_Le_Thi_Tuyet_Mai_Au_Thi_Kieu_Trang/`](10_Vu_Le_Thi_Tuyet_Mai_Au_Thi_Kieu_Trang/) | 5 |
+| 11 | 25/11/2026 | [`11_Vu_Phan_Van_Bay_Tran_Van_Mung/`](11_Vu_Phan_Van_Bay_Tran_Van_Mung/) | 1 |
+| 12 | 05/11/2026 | [`12_Vu_Nguyen_Ngoc_Hien_Nguyen_Kien_Thanh/`](12_Vu_Nguyen_Ngoc_Hien_Nguyen_Kien_Thanh/) | 4 |
+| 13 | 07/04/2026 | [`13_Vu_Lam_Thi_Deo_Vu_Thanh_Do/`](13_Vu_Lam_Thi_Deo_Vu_Thanh_Do/) | 1 |
 | 99 | Mẫu | [`99_Mau_Template_Demo/`](99_Mau_Template_Demo/) | 1 |
